@@ -85,3 +85,4 @@ while True:
         print(f"\nErro: {e}")
         input()
         break
+#boa noite 👋👋
