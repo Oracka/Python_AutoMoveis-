@@ -1,5 +1,5 @@
-# !!-Esse é o arquivo da Janaína que copiei aqui só caso a gente precise- !!
-# (chama cp.py porque cp = cadastro_pecas)
+# !! -Esse é o arquivo da Janaína que copiei aqui só caso a gente precise- !!
+# (chama cp.py porque cp = cadastro_produto)
 
 
 # Importa o módulo de leitura do banco, que contém as funções ler_banco e salvar_banco

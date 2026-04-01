@@ -37,10 +37,13 @@ def cadastro_pecas() -> None:
 cadastro_pecas()
 """
 
+clearConsole()
+
 while True:
-    print("\n-----BD AUTOMOVEIS----")
+    print("-----BD AUTOMOVEIS----")
     print("Por favor, digite:")
-    print("1- Pesquisar peças por modelo de automóvel;")
+    print("0 - Sair;")
+    print("1 - Pesquisar peças por modelo de automóvel;")
     try:
         opcao = int(input("Opção desejada: "))
         match opcao:
@@ -59,7 +62,7 @@ while True:
                 break
             case 1:
                 # Botei abluble só como placeholder
-                print("abluble")
+                print("\nabluble")
                 # Coloquei esse input() só pra o código não rodar de uma vez sem o usuário conseguir ler
                 input()
                 clearConsole()
@@ -67,8 +70,9 @@ while True:
             # Ele é tipo o "else" no sentido de que vai rodar se nenhum dos
             # casos anteriores forem atendidos   
             case _:
-                print("ERRO: Valor fora das opções.")
-                input(print("Pressione Enter:"))
+                print("\nERRO: Valor fora das opções.")
+                input()
+                clearConsole()
     # "ValueError" trata dos erros que ocorrem quando o valor inserido está fora do escopo* 
     # *: eu aacho que se diz escopo...
     # Exemplo: o valor "x" é inserido numa variável int (que só aceita valores inteiros)  
@@ -78,6 +82,6 @@ while True:
         clearConsole()
     # E esse bloco vai tratar de todos os outros erros e registrá-los nessa variavel "e"
     except Exception as e:
-        print(f"Erro: {e}")
+        print(f"\nErro: {e}")
         input()
         break
