@@ -1,10 +1,19 @@
 import leitura_banco
+# Importei o "time" porque usei a função "time.sleep" pra fazer o programa esperar segundos.
+# Eu imagino que ele também é usado para o tal do datetime né.
+import time
+# Importei esse "os" pra podermos limpar o terminal quando desejarmos.
+# Eu simplesmente copiei um código que encontrei pra limpar tela:
+# os.system('cls' if os.name == 'nt' else 'clear')
+import os
 
+def clearConsole(): 
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+# Eu comentei esse blocão de código porque não sei como ele será usado...
+# Vocês podem usar ele se precisarem
+"""
 def cadastro_pecas() -> None: 
-
-
-
-
     print("-- cadastro Aqui --")
     peca = input("nome peça: ")
     tipo = input("tipo: ")
@@ -14,15 +23,61 @@ def cadastro_pecas() -> None:
     veiculo = input("veiculos compátiveis (separar por virgula) ")
 
     novaPeca = {
-        "id": novo_id, 
-        "peca": peca,
+        # "id": novo_id, 
+        "peca": peca,   
         "tipo": tipo,
         "parte": parte,
-        "veiculos": lista_veiculos,
+        # "veiculos": lista_veiculos,
         "fabricante": fabricante,
         "data_fabricacao": data
     }
 
     peca.append(novaPeca)
 
-    cadastro_pecas()
+cadastro_pecas()
+"""
+
+while True:
+    print("\n-----BD AUTOMOVEIS----")
+    print("Por favor, digite:")
+    print("1- Pesquisar peças por modelo de automóvel;")
+    try:
+        opcao = int(input("Opção desejada: "))
+        match opcao:
+            case 0:
+                # Não assusta com esse trem não!! Eu só quis fazer um efeitozinho
+                # de "Saindo..." pra quando o usuário digitar "0". Eu pesquisei e
+                # esse código me ajudou a fazer isso. yay!
+                print("\n\rSaindo", end="", flush=True)
+                time.sleep(0.35)
+                print("\rSaindo.", end="", flush=True)
+                time.sleep(0.35)
+                print("\rSaindo..", end="", flush=True)
+                time.sleep(0.35)
+                print("\rSaindo...", end="", flush=True)
+                time.sleep(0.35)
+                break
+            case 1:
+                # Botei abluble só como placeholder
+                print("abluble")
+                # Coloquei esse input() só pra o código não rodar de uma vez sem o usuário conseguir ler
+                input()
+                clearConsole()
+            # "case _:" funciona como um "default".
+            # Ele é tipo o "else" no sentido de que vai rodar se nenhum dos
+            # casos anteriores forem atendidos   
+            case _:
+                print("ERRO: Valor fora das opções.")
+                input(print("Pressione Enter:"))
+    # "ValueError" trata dos erros que ocorrem quando o valor inserido está fora do escopo* 
+    # *: eu aacho que se diz escopo...
+    # Exemplo: o valor "x" é inserido numa variável int (que só aceita valores inteiros)  
+    except ValueError:
+        print("\nERRO: Digite um valor númerico inteiro.")
+        input()
+        clearConsole()
+    # E esse bloco vai tratar de todos os outros erros e registrá-los nessa variavel "e"
+    except Exception as e:
+        print(f"Erro: {e}")
+        input()
+        break
