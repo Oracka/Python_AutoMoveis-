@@ -4,7 +4,7 @@ ARQUIVO = r"C:\Users\tpere\Downloads\Python_AutoMoveis-\dados.json"
 
 # Função que lê o banco de dados JSON e retorna um dicionário
 # caminho tem valor padrão, então pode ser chamada sem argumentos: ler_banco()
-def leitura_banco():
+def ler_banco():
     try:
         # Abre o arquivo no modo leitura com encoding UTF-8 para suportar acentos
         with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
