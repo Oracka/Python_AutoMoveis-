@@ -21,18 +21,21 @@ import os
 def clearConsole(): 
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def saindo():
+def saindo(acao: str):
     # Não assusta com esse trem não!! Eu só quis fazer um efeitozinho
     # de "Saindo..." pra quando o usuário digitar "0". Eu pesquisei e
     # esse código me ajudou a fazer isso. yay!
-    print("\n\rSaindo", end="", flush=True)
-    time.sleep(0.35)
-    print("\rSaindo.", end="", flush=True)
-    time.sleep(0.35)
-    print("\rSaindo..", end="", flush=True)
-    time.sleep(0.35)
-    print("\rSaindo...", end="", flush=True)
-    time.sleep(0.35)
+
+    # O parâmetro "acao" permite que você escolha que verbo você vai mostrar na tela com a animação
+    # Exemplo: Saindo...; Voltando...;
+    print(f"\n\r{acao}", end="", flush=True)
+    time.sleep(0.25)
+    print(f"\r{acao}.", end="", flush=True)
+    time.sleep(0.25)
+    print(f"\r{acao}..", end="", flush=True)
+    time.sleep(0.25)
+    print(f"\r{acao}...", end="", flush=True)
+    time.sleep(0.25)
 
 clearConsole()
 
@@ -47,13 +50,11 @@ def automoveis():
             opcao = int(input("Opção desejada: "))
             match opcao:
                 case 0:
-                    saindo()
+                    acao = "Saindo"
+                    saindo(acao)
                     break
                 case 1:
-                    clearConsole()
-                    print("-----BD AUTOMOVEIS----")
-                    print("--Pesquisar peças por modelo de automóvel--")
-                    input()
+                    pesquisarPecaPorModelo()
                     clearConsole()
                 # "case _:" funciona como um "default".
                 # Ele é tipo o "else" no sentido de que vai rodar se nenhum dos
@@ -78,8 +79,8 @@ def automoveis():
 
 #---02/04/26---
 
-# FUNÇÃO PARA MOSTRAR PEÇAS DE ACORDO COM O MODELO DE CARRO DESEJADO
-def filtrarPecas(dados, modeloDesejado):
+# FUNÇÃO PARA CRIAR LISTA APENAS COM AS PEÇAS DO MODELO DE CARRO DESEJADO
+def filtrarEMostrarPecas(dados, modeloDesejado):
     # Esse código demandou uma pesquisa pra aprender... Vou tentar explicar:
 
     """
@@ -92,7 +93,7 @@ def filtrarPecas(dados, modeloDesejado):
     de dados["pecas"]* (dados foi passado como parâmetro na função).
         *: lembrando que a estrutura de nosso arquivo json é:
         um dicionário com UMA chave (pecas), que tem uma LISTA como valor. Essa LISTA
-        contém dicionários. Dessa maneira:
+        contém dicionários. Dessa maneira (exemplo):
         {
             "pecas": [
                 {"id": 1, "peca": "Primeira peça", "veiculos": ["Porsche","Mustang"]}
@@ -116,6 +117,16 @@ def filtrarPecas(dados, modeloDesejado):
         if modeloDesejado in listaPecas["veiculos"]:
             listaPecasFiltradas.append(listaPecas)
 
+    print(f"--PEÇAS COMPATÍVEIS COM {modeloDesejado.upper()}--")
+
+    for items in listaPecasFiltradas:
+        id = items["id"]
+        peca = items["peca"]
+        fabricante = items["fabricante"]
+        print(f"-{peca} - {fabricante} (ID: {id});")
+    input("Pressione Enter para retornar ")
+
+
 
 def pesquisarPecaPorModelo():
     while True:
@@ -123,7 +134,7 @@ def pesquisarPecaPorModelo():
         dados = leitura_banco.ler_banco()
         print("-----BD AUTOMOVEIS----")
         print("--Pesquisar peças por modelo de automóvel--")
-        print("0 - Sair")
+        print("0 - Voltar")
         print("Modelos dísponíveis atualmente:")
         print("-Fusca;")
         print("-Kombi;")
@@ -134,33 +145,31 @@ def pesquisarPecaPorModelo():
             modeloDesejado = input("Digite o modelo desejado: ").lower()
             match modeloDesejado:
                 case "0":
-                    saindo()
+                    acao = "Voltando"
+                    saindo(acao)
                     break
                 case "fusca":
+                    clearConsole()
                     modeloDesejado = "Fusca"
+                    filtrarEMostrarPecas(dados, modeloDesejado)
+                case "kombi":
+                    clearConsole()
+                    modeloDesejado = "Kombi"
+                    filtrarEMostrarPecas(dados, modeloDesejado)
+                case "mustang":
+                    clearConsole()
+                    modeloDesejado = "Mustang"
+                    filtrarEMostrarPecas(dados, modeloDesejado)
+                case "porsche":
+                    clearConsole()
+                    modeloDesejado = "Porsche"
+                    filtrarEMostrarPecas(dados, modeloDesejado)
+                case "voyage":
+                    clearConsole()
+                    modeloDesejado = "Voyage"
+                    filtrarEMostrarPecas(dados, modeloDesejado)
                 case _:
                     print("\nModelo não identificado, tente novamente.")
                     input()
         except Exception as e:
             print(f"\nERRO: {e}")
-
-"""
-veiculo_procurado = "Voyage"
-
-for items in dados["pecas"]:
-    if veiculo_procurado in items["veiculos"]:
-        pecas_filtradas.append(items)
-
-print(f"Peças compatíveis com o {veiculo_procurado}:")
-print("-" * 40)
-
-for item in pecas_filtradas:
-    id = item['id']
-    nome = item["peca"]
-    fabricante = item["fabricante"]
-    veiculos_compativeis = item["veiculos"]
-    print(f"ID: {id} | Peça: {nome} | Fabricante: {fabricante} | Compatibilidade: {veiculos_compativeis}")
-
-# Método 2: Usando a função filter (Alternativa funcional)
-# pecas_filtradas_alt = list(filter(lambda p: veiculo_procurado in p["veiculos"], dados["pecas"]))
-"""

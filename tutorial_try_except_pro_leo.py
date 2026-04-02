@@ -2,7 +2,7 @@
 # esse aqui é o tutorial oficial de try except ok
 # ----------------------------------------------------------
 
-# As vezes que eu utilizei o try catch foram para prevenir que o programa pare de rodar
+# As vezes que eu utilizei o try except foram para prevenir que o programa pare de rodar
 # quando o usuário faz algo de errado.
 
 # Por exemplo:
@@ -16,13 +16,13 @@ inteiro = int(input("Digite um valor\n"))
 
 try: # Você coloca a linha de código que pode gerar um erro dentro do "try"...
     inteiro = int(input("\nDigite um inteiro porfas\n"))
-# ... E no except, você vai tratar dos possíveis erros que podem ocorrer com
-# a linha de código dentro do try
+# ... E no except, você vai tratar dos possíveis erros que podem ocorrer após a excecução
+# da linha de código dentro do try
 except ValueError: # "ValueError" é um dos vários erros que você pode "especificar". Ao inserí-lo
                    # junto ao except, você diz ao código para tratar aquele erro específico (nesse
-                   # caso, o erro que ocorre quando um valor inválido é digitado, como uma string 
+                   # caso, o erro que ocorre quando um valor inválido é digitado, como uma string
                    # num tipo int)
-    print("\nDigita certo zeee!")
+    print("\nDigita um valor inteiro zeee!")
     input()
 except Exception as e: # E eu tenho quase certeza que o "Exception" só representa qualquer erro.
                        # O "as e" do lado serve para inserir uma string dentro da varíavel "e"
