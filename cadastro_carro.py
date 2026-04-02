@@ -64,51 +64,60 @@ cadastro_pecas()
 """
 
 clearConsole()
-
-while True:
-    print("-----BD AUTOMOVEIS----")
-    print("Por favor, digite:")
-    print("0 - Sair;")
-    print("1 - Pesquisar peças por modelo de automóvel;")
-    try:
-        opcao = int(input("Opção desejada: "))
-        match opcao:
-            case 0:
-                # Não assusta com esse trem não!! Eu só quis fazer um efeitozinho
-                # de "Saindo..." pra quando o usuário digitar "0". Eu pesquisei e
-                # esse código me ajudou a fazer isso. yay!
-                print("\n\rSaindo", end="", flush=True)
-                time.sleep(0.35)
-                print("\rSaindo.", end="", flush=True)
-                time.sleep(0.35)
-                print("\rSaindo..", end="", flush=True)
-                time.sleep(0.35)
-                print("\rSaindo...", end="", flush=True)
-                time.sleep(0.35)
-                break
-            case 1:
-                # Botei abluble só como placeholder
-                print("\nabluble")
-                # Coloquei esse input() só pra o código não rodar de uma vez sem o usuário conseguir ler
-                input()
-                clearConsole()
-            # "case _:" funciona como um "default".
-            # Ele é tipo o "else" no sentido de que vai rodar se nenhum dos
-            # casos anteriores forem atendidos   
-            case _:
-                print("\nERRO: Valor fora das opções.")
-                input()
-                clearConsole()
-    # "ValueError" trata dos erros que ocorrem quando o valor inserido está fora do escopo* 
-    # *: eu aacho que se diz escopo...
-    # Exemplo: o valor "x" é inserido numa variável int (que só aceita valores inteiros)  
-    except ValueError:
-        print("\nERRO: Digite um valor númerico inteiro.")
-        input()
-        clearConsole()
-    # E esse bloco vai tratar de todos os outros erros e registrá-los nessa variavel "e"
-    except Exception as e:
-        print(f"\nErro: {e}")
-        input()
-        break
+"""
+# Essa pode ser a função principal que será rodada no main.py
+def automoveis():
+    while True:
+        print("-----BD AUTOMOVEIS----")
+        print("Por favor, digite:")
+        print("0 - Sair;")
+        print("1 - Pesquisar peças por modelo de automóvel;")
+        try:
+            opcao = int(input("Opção desejada: "))
+            match opcao:
+                case 0:
+                    # Não assusta com esse trem não!! Eu só quis fazer um efeitozinho
+                    # de "Saindo..." pra quando o usuário digitar "0". Eu pesquisei e
+                    # esse código me ajudou a fazer isso. yay!
+                    print("\n\rSaindo", end="", flush=True)
+                    time.sleep(0.35)
+                    print("\rSaindo.", end="", flush=True)
+                    time.sleep(0.35)
+                    print("\rSaindo..", end="", flush=True)
+                    time.sleep(0.35)
+                    print("\rSaindo...", end="", flush=True)
+                    time.sleep(0.35)
+                    break
+                case 1:
+                    clearConsole()
+                    print("-----BD AUTOMOVEIS----")
+                    print("--Pesquisar peças por modelo de automóvel--")
+                    input()
+                    clearConsole()
+                # "case _:" funciona como um "default".
+                # Ele é tipo o "else" no sentido de que vai rodar se nenhum dos
+                # casos anteriores forem atendidos   
+                case _:
+                    print("\nERRO: Valor fora das opções.")
+                    input()
+                    clearConsole()
+        # "ValueError" trata dos erros que ocorrem quando o valor inserido está fora do escopo* 
+        # *: eu aacho que se diz escopo...
+        # Exemplo: o valor "x" é inserido numa variável int (que só aceita valores inteiros)  
+        except ValueError:
+            print("\nERRO: Digite um valor númerico inteiro.")
+            input()
+            clearConsole()
+        # E esse bloco vai tratar de todos os outros erros e registrá-los nessa variavel "e"
+        except Exception as e:
+            print(f"\nErro: {e}")
+            input()
+            break
 #boa noite 👋👋
+"""
+# automoveis()
+
+dados = leitura_banco.leitura_banco()
+print(dados)
+for item in dados["pecas"]:
+    print(item["id"])
