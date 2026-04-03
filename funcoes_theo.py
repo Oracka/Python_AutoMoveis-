@@ -39,46 +39,6 @@ def saindo(acao: str):
 
 clearConsole()
 
-# Essa pode ser a função principal que será rodada no main.py
-def automoveis():
-    while True:
-        print("-----BD AUTOMOVEIS----")
-        print("Por favor, digite:")
-        print("0 - Sair;")
-        print("1 - Pesquisar peças por modelo de automóvel;")
-        try:
-            opcao = int(input("Opção desejada: "))
-            match opcao:
-                case 0:
-                    acao = "Saindo"
-                    saindo(acao)
-                    break
-                case 1:
-                    pesquisarPecaPorModelo()
-                    clearConsole()
-                # "case _:" funciona como um "default".
-                # Ele é tipo o "else" no sentido de que vai rodar se nenhum dos
-                # casos anteriores forem atendidos   
-                case _:
-                    print("\nERRO: Valor fora das opções.")
-                    input()
-                    clearConsole()
-        # "ValueError" trata dos erros que ocorrem quando o valor inserido está fora do escopo* 
-        # *: eu aacho que se diz escopo...
-        # Exemplo: o valor "x" é inserido numa variável int (que só aceita valores inteiros)  
-        except ValueError:
-            print("\nERRO: Digite um valor númerico inteiro.")
-            input()
-            clearConsole()
-        # E esse bloco vai tratar de todos os outros erros e registrá-los nessa variavel "e"
-        except Exception as e:
-            print(f"\nErro: {e}")
-            input()
-            break
-#boa noite 👋👋
-
-#---02/04/26---
-
 # FUNÇÃO PARA CRIAR LISTA APENAS COM AS PEÇAS DO MODELO DE CARRO DESEJADO
 def filtrarEMostrarPecas(dados, modeloDesejado):
     # Esse código demandou uma pesquisa pra aprender... Vou tentar explicar:
@@ -119,6 +79,11 @@ def filtrarEMostrarPecas(dados, modeloDesejado):
 
     print(f"--PEÇAS COMPATÍVEIS COM {modeloDesejado.upper()}--")
 
+    """
+    Por último, um "for" passa por cada dicionário da lista "listaPecaFiltradas" e obtém o "id", "peca"
+    e "fabricante" do item para printar ele na tela!
+    CABOU
+    """
     for items in listaPecasFiltradas:
         id = items["id"]
         peca = items["peca"]
@@ -126,8 +91,7 @@ def filtrarEMostrarPecas(dados, modeloDesejado):
         print(f"-{peca} - {fabricante} (ID: {id});")
     input("Pressione Enter para retornar ")
 
-
-
+# FUNÇÃO PARA FUNCIONALIDADE DE PESQUISAR PEÇA POR MODELO DE VEÍCULO
 def pesquisarPecaPorModelo():
     while True:
         clearConsole()
@@ -173,3 +137,60 @@ def pesquisarPecaPorModelo():
                     input()
         except Exception as e:
             print(f"\nERRO: {e}")
+
+"""
+-perguntar ao usuário
+1. remover peça
+2. mostrar banco de dados
+    -até que índice mostrar janta da anabia linda e perfeita
+"""
+def removerPeca():
+    while True:
+        clearConsole()
+        dados = leitura_banco.ler_banco()
+        print("-----BD AUTOMOVEIS----")
+        print("--Pesquisar peças por modelo de automóvel--")
+        print("0 - Voltar")
+
+# FUNÇÃO PRINCIPAL QUE RODARÁ NO MAIN.PY E CONTÉM AS FUNCIONALIDADES
+def automoveis():
+    while True:
+        print("-----BD AUTOMOVEIS----")
+        print("Por favor, digite:")
+        print("0 - Sair;")
+        print("1 - Pesquisar peças por modelo de automóvel;")
+        try:
+            opcao = int(input("Opção desejada: "))
+            match opcao:
+                case 0:
+                    acao = "Saindo"
+                    saindo(acao)
+                    break
+                case 1:
+                    pesquisarPecaPorModelo()
+                    clearConsole()
+                case 2:
+                    removerPeca()
+                    clearConsole()
+                # "case _:" funciona como um "default".
+                # Ele é tipo o "else" no sentido de que vai rodar se nenhum dos
+                # casos anteriores forem atendidos   
+                case _:
+                    print("\nERRO: Valor fora das opções.")
+                    input()
+                    clearConsole()
+        # "ValueError" trata dos erros que ocorrem quando o valor inserido está fora do escopo* 
+        # *: eu aacho que se diz escopo...
+        # Exemplo: o valor "x" é inserido numa variável int (que só aceita valores inteiros)  
+        except ValueError:
+            print("\nERRO: Digite um valor númerico inteiro.")
+            input()
+            clearConsole()
+        # E esse bloco vai tratar de todos os outros erros e registrá-los nessa variavel "e"
+        except Exception as e:
+            print(f"\nErro: {e}")
+            input()
+            break
+#boa noite 👋👋
+
+automoveis()
