@@ -4,20 +4,19 @@ ARQUIVO = r"C:\Users\tpere\Downloads\Python_AutoMoveis-\dados.json"
 
 # Função que lê o banco de dados JSON e retorna um dicionário
 # caminho tem valor padrão, então pode ser chamada sem argumentos: ler_banco()
-def leitura_banco():
+def ler_banco():
     try:
         # Abre o arquivo no modo leitura com encoding UTF-8 para suportar acentos
         with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
-            # Lê todo o conteúdo e remove espaços/quebras de linha nas bordas
             dados = json.load(arquivo)
             return dados
             # Se o arquivo estiver vazio, avisa e retorna dicionário vazio
-            # if not conteudo:
-            #    print("Arquivo vazio.")
-            #    return {}
-            #
+            if not conteudo:
+                print("Arquivo vazio.")
+                return {}
+            
             # Converte o texto JSON em dicionário Python e retorna
-            # return json.loads(conteudo)
+            return json.loads(conteudo)
         
     # Caso o arquivo não exista no caminho informado
     except FileNotFoundError:
