@@ -142,7 +142,7 @@ def pesquisarPecaPorModelo():
 -perguntar ao usuário
 1. remover peça
 2. mostrar banco de dados
-    -até que índice mostrar janta da anabia linda e perfeita
+    -até que índice mostrar
 """
 def removerPeca():
     while True:
