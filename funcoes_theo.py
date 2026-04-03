@@ -40,7 +40,7 @@ def saindo(acao: str):
 clearConsole()
 
 # FUNÇÃO PARA CRIAR LISTA APENAS COM AS PEÇAS DO MODELO DE CARRO DESEJADO
-def filtrarEMostrarPecas(dados, modeloDesejado):
+def filtrarEMostrarPecasFuncao(dados, modeloDesejado):
     # Esse código demandou uma pesquisa pra aprender... Vou tentar explicar:
 
     """
@@ -115,23 +115,23 @@ def pesquisarPecaPorModelo():
                 case "fusca":
                     clearConsole()
                     modeloDesejado = "Fusca"
-                    filtrarEMostrarPecas(dados, modeloDesejado)
+                    filtrarEMostrarPecasFuncao(dados, modeloDesejado)
                 case "kombi":
                     clearConsole()
                     modeloDesejado = "Kombi"
-                    filtrarEMostrarPecas(dados, modeloDesejado)
+                    filtrarEMostrarPecasFuncao(dados, modeloDesejado)
                 case "mustang":
                     clearConsole()
                     modeloDesejado = "Mustang"
-                    filtrarEMostrarPecas(dados, modeloDesejado)
+                    filtrarEMostrarPecasFuncao(dados, modeloDesejado)
                 case "porsche":
                     clearConsole()
                     modeloDesejado = "Porsche"
-                    filtrarEMostrarPecas(dados, modeloDesejado)
+                    filtrarEMostrarPecasFuncao(dados, modeloDesejado)
                 case "voyage":
                     clearConsole()
                     modeloDesejado = "Voyage"
-                    filtrarEMostrarPecas(dados, modeloDesejado)
+                    filtrarEMostrarPecasFuncao(dados, modeloDesejado)
                 case _:
                     print("\nModelo não identificado, tente novamente.")
                     input()
@@ -144,13 +144,34 @@ def pesquisarPecaPorModelo():
 2. mostrar banco de dados
     -até que índice mostrar
 """
+def removerPecaFuncao():
+    
+
 def removerPeca():
     while True:
         clearConsole()
         dados = leitura_banco.ler_banco()
         print("-----BD AUTOMOVEIS----")
-        print("--Pesquisar peças por modelo de automóvel--")
-        print("0 - Voltar")
+        print("--Remover peças--")
+        print("0 - Voltar;")
+        print("1 - Remover peça;")
+        print("2 - Mostrar banco de dados.")
+        try:
+            opcao = int(input("Opção desejada: "))
+            match opcao:
+                case 0:
+                    acao = "Voltar"
+                    saindo(acao)
+                    break
+        except ValueError:
+            print("\nERRO: Digite um valor númerico inteiro.")
+            input()
+            clearConsole()
+        # E esse bloco vai tratar de todos os outros erros e registrá-los nessa variavel "e"
+        except Exception as e:
+            print(f"\nErro: {e}")
+            input()
+
 
 # FUNÇÃO PRINCIPAL QUE RODARÁ NO MAIN.PY E CONTÉM AS FUNCIONALIDADES
 def automoveis():
@@ -159,6 +180,7 @@ def automoveis():
         print("Por favor, digite:")
         print("0 - Sair;")
         print("1 - Pesquisar peças por modelo de automóvel;")
+        print("2 - Remover peça.")
         try:
             opcao = int(input("Opção desejada: "))
             match opcao:
@@ -188,7 +210,7 @@ def automoveis():
             clearConsole()
         # E esse bloco vai tratar de todos os outros erros e registrá-los nessa variavel "e"
         except Exception as e:
-            print(f"\nErro: {e}")
+            print(f"\nERRO: {e}")
             input()
             break
 #boa noite 👋👋
