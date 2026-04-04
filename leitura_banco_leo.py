@@ -1,0 +1,23 @@
+import json
+#Criação de variaveis
+caminho_Json = r"C:\Users\yhfff\OneDrive\Desktop\Escola\3 ano\Pythom\E1\E1_Atv10_automoveis_Colaborativo\Python_AutoMoveis--main\dados.json"
+
+#FUNÇÃO QUE LÊ O QUE ESTA NO BANCO(JSON --> Python)
+def lersJson():
+    #open(arquivo que vai ser lido, modo(escrever, ler ou etc))
+    with open(caminho_Json,"r",encoding="utf=8") as json_saida:
+        #json.load = pega os dados do arquivo json
+        #json.loads = transforma o json em string no python
+        data_transform = json_saida.read()
+    return json.loads(data_transform)
+
+#FUNÇÃO QUE GUARDA AS INFORMAÇÕES DE CADASTRO(Python --> JSON)
+#Sera usada logo após as informações do cadastro serem colocadas
+#Função que mandara as infos para json
+def salvarJson(dados_python:dict, caminho:str = caminho_Json) ->None:
+    with open(caminho_Json,"w",encoding="utf=8") as json_entrada:
+        #json.dump -> dicionário python para 
+        #json.dump(o_que_vou_salvar,arquivo_onde_vai_ser_salvo)
+        json.dump(dados_python, json_entrada, ensure_ascii=False, indent=2)
+        #indent=2 formato a json com recuo de 2 espaços
+        #ensure_ascii=false -> preserva acentos e caracteres especiais

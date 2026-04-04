@@ -1,7 +1,4 @@
-"""
-Acho que podemos usar esse Main.py igual estamos fazendo na atividade da calculadora
-que ela mandou na terça feira: só rodar o mínimo aqui e deixar as funções nos outros
-arquivos. Vocês concordam?
+import funcoes_gerais
+import exibir_bd
 
-eeebaaa a aa eu preciso dormir
-"""
+funcoes_gerais.automoveis()

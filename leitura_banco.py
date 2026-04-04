@@ -1,5 +1,5 @@
 import json
-
+#Leo = mexer no leitura banco
 ARQUIVO = r"C:\Users\tpere\Downloads\Python_AutoMoveis-\dados.json"
 
 # Função que lê o banco de dados JSON e retorna um dicionário
@@ -9,22 +9,20 @@ def ler_banco():
         # Abre o arquivo no modo leitura com encoding UTF-8 para suportar acentos
         with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
             dados = json.load(arquivo)
-            return dados
             # Se o arquivo estiver vazio, avisa e retorna dicionário vazio
-            if not conteudo:
+            if not dados:
                 print("Arquivo vazio.")
                 return {}
-            
-            # Converte o texto JSON em dicionário Python e retorna
-            return json.loads(conteudo)
+        # Converte o texto JSON em dicionário Python e retorna
+        return json.loads(dados)
         
-    # Caso o arquivo não exista no caminho informado
     except FileNotFoundError:
+        # Caso o arquivo não exista no caminho informado
         print(f"Arquivo '{ARQUIVO}' não encontrado.")
         return {}
 
-    # Caso o conteúdo do arquivo não seja um JSON válido
     except json.JSONDecodeError as e:
+        # Caso o conteúdo do arquivo não seja um JSON válido
         print(f"Erro ao decodificar JSON: {e}")
         return {}
 
