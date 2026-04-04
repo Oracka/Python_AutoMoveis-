@@ -28,7 +28,7 @@ def saindo(acao: str):
 
     # O parâmetro "acao" permite que você escolha que verbo você vai mostrar na tela com a animação
     # Exemplo: Saindo...; Voltando...;
-    segundos = 0.3
+    segundos = 0.20
     print(f"\n\r{acao}", end="", flush=True)
     time.sleep(segundos)
     print(f"\r{acao}.", end="", flush=True)
@@ -38,50 +38,127 @@ def saindo(acao: str):
     print(f"\r{acao}...", end="", flush=True)
     time.sleep(segundos)
 
-def mostrar_bd_funcao(inicio, fim):
+# ///////////////////////////////////////////////////////////////////////////////
+# ///////////////////////////////////////////////////////////////////////////////
+
+def exibir_bd_funcao(banco_pecas, inicio, fim):
+    clear_console()
     dados = leitura_banco.ler_banco()
+    # ---TEMPORARIO:
+    banco_pecas = []
+    for item in dados["pecas"]:
+        banco_pecas.append(item)
+    # ---
+    primeiro_registro = banco_pecas[0]
+    ultimo_registro = banco_pecas[-1]
+
+    if inicio == primeiro_registro["id"] and fim == ultimo_registro["id"]:
+        print("--BANCO DE PEÇAS (TODOS)--")
+    else:
+        print(f"--BANCO DE PEÇAS ({inicio} A {fim})--")
+
     item = 0
-    for banco_dados in dados["pecas"]:
-        id = banco_dados["id"]
-        peca = banco_dados["peca"]
-        tipo = banco_dados["tipo"]
-        parte = banco_dados["parte"]
-        veiculos = banco_dados["veiculos"]
-        fabricante = banco_dados["fabricante"]
-        data_fabricacao = banco_dados["data_fabricacao"]
+    for banco_pecas in banco_pecas:
+        id = banco_pecas["id"]
+        peca = banco_pecas["peca"]
+        tipo = banco_pecas["tipo"]
+        parte = banco_pecas["parte"]
+        veiculos = banco_pecas["veiculos"]
+        fabricante = banco_pecas["fabricante"]
+        data_fabricacao = banco_pecas["data_fabricacao"]
         item += 1
         if item >= inicio and item <= fim:
             print(f"---ID: {id} | PEÇA: {peca} | VEÍCULOS: {veiculos}\n   TIPO: {tipo} | PARTE: {parte} | FABRICANTE: {fabricante}\n   DATA DA FABRICAÃO: {data_fabricacao}")
+    input("Pressione Enter para retornar ")
 
-def mostrar_bd():
-        dados = leitura_banco.ler_banco()
-
-        banco_pecas = []
-        for item in dados["pecas"]:
-            banco_pecas.append(item)
-
+def definir_inicio_e_fim_funcao(escopo_atual, tamanho_banco):
+    while True:
+        clear_console()
+        print("-----BD AUTOMOVEIS----")
+        print("--Exibir banco de peças--")
+        print("0 - Voltar")
+        print("1 - Exibir banco")
+        print(f"2 - Definir quantidade de registros a serem exibidos (ATUAL: {escopo_atual})")
+        print("Opção desejada: 2")
+        try:
+            inicio = int(input("\nDigite o valor de início: "))
+            break
+        except ValueError:
+            print("\nERRO: Digite um valor númerico inteiro.")
+            input()
+        except Exception as e:
+            print(f"\nERRO: {e}")
+            input()
+    aviso_tamanho_inicio = ""
+    if inicio > tamanho_banco:
+        aviso_tamanho_inicio = f"(O valor inserido ({inicio}) excede o número de peças do banco ({tamanho_banco}))"
+        inicio = tamanho_banco
+    elif inicio < 1:
+        aviso_tamanho_inicio = f"(O valor inserido ({inicio}) é menor que 1)"
         inicio = 1
-        fim = len(banco_pecas)
+    while True:
+        clear_console()
+        print("-----BD AUTOMOVEIS----")
+        print("--Exibir banco de peças--")
+        print("0 - Voltar")
+        print("1 - Exibir banco")
+        print(f"2 - Definir quantidade de registros a serem exibidos (ATUAL: {escopo_atual})")
+        print("Opção desejada: 2")
+        print(f"\nDigite o valor de início: {inicio} {aviso_tamanho_inicio}")
+        try:
+            fim = int(input("Digite o valor final: "))
+            break
+        except ValueError:
+            print("\nERRO: Digite um valor númerico inteiro.")
+            input()
+        except Exception as e:
+            print(f"\nERRO: {e}")
+            input()
+    if fim < inicio:
+        aviso_tamanho_fim = f"(O valor inserido ({fim}) é menor que o valor de início ({inicio}))"
+        fim = inicio
+    if fim > tamanho_banco:
+        aviso_tamanho_inicio = f"(O valor inserido ({inicio}) excede o número de peças do banco ({tamanho_banco}))"
+        fim = tamanho_banco
+    return inicio, fim
+
+def exibir_bd(banco_pecas, inicio, fim):
         primeiro_registro = banco_pecas[0]
         ultimo_registro = banco_pecas[-1]
-        
         while True:
             clear_console()
             if inicio == primeiro_registro["id"] and fim == ultimo_registro["id"]:
-                print("EEBBA")
-            print(f"{inicio} e {primeiro_registro["id"]}; {fim} e {ultimo_registro["id"]}")
+                escopo_atual = f"Todos [{len(banco_pecas)}]"
+            else:
+                escopo_atual = f"{inicio} a {fim}"
             print("-----BD AUTOMOVEIS----")
-            print("--Mostrar banco de peças--")
+            print("--Exibir banco de peças--")
             print("0 - Voltar")
-            print("1 - Mostrar banco")
-            print(f"2 - Definir quantidade de registros a serem exibidos (Atual: )")
-            break
-        
-mostrar_bd()
+            print("1 - Exibir banco")
+            print(f"2 - Definir quantidade de registros a serem exibidos (ATUAL: {escopo_atual})")
+            try:
+                opcao = int(input("Opção desejada: "))
+                match opcao:
+                    case 0:
+                        acao = "Voltando"
+                        saindo(acao)
+                        break
+                    case 1:
+                        exibir_bd_funcao(banco_pecas, inicio, fim)
+                    case 2:
+                        inicio, fim = definir_inicio_e_fim_funcao(escopo_atual, len(banco_pecas))
+            except ValueError:
+                print("\nERRO: Digite um valor númerico inteiro.")
+                input()
+            except Exception as e:
+                print(f"\nERRO: {e}")
+                input()
 
+# ///////////////////////////////////////////////////////////////////////////////
+# ///////////////////////////////////////////////////////////////////////////////
 
 # FUNÇÃO PARA CRIAR LISTA APENAS COM AS PEÇAS DO MODELO DE CARRO DESEJADO
-def filtrar_e_mostrar_pecas_funcao(dados, modelo_desejado):
+def exibir_peca_por_modelo_funcao(dados, modelo_desejado):
     # Esse código demandou uma pesquisa pra aprender... Vou tentar explicar:
 
     """
@@ -133,7 +210,7 @@ def filtrar_e_mostrar_pecas_funcao(dados, modelo_desejado):
     input("Pressione Enter para retornar ")
 
 # FUNÇÃO PARA FUNCIONALIDADE DE PESQUISAR PEÇA POR MODELO DE VEÍCULO
-def pesquisarPecaPorModelo():
+def exibir_peca_por_modelo():
     while True:
         clear_console()
         dados = leitura_banco.ler_banco()
@@ -156,35 +233,32 @@ def pesquisarPecaPorModelo():
                 case "fusca":
                     clear_console()
                     modelo_desejado = "Fusca"
-                    filtrar_e_mostrar_pecas_funcao(dados, modelo_desejado)
+                    exibir_peca_por_modelo_funcao(dados, modelo_desejado)
                 case "kombi":
                     clear_console()
                     modelo_desejado = "Kombi"
-                    filtrar_e_mostrar_pecas_funcao(dados, modelo_desejado)
+                    exibir_peca_por_modelo_funcao(dados, modelo_desejado)
                 case "mustang":
                     clear_console()
                     modelo_desejado = "Mustang"
-                    filtrar_e_mostrar_pecas_funcao(dados, modelo_desejado)
+                    exibir_peca_por_modelo_funcao(dados, modelo_desejado)
                 case "porsche":
                     clear_console()
                     modelo_desejado = "Porsche"
-                    filtrar_e_mostrar_pecas_funcao(dados, modelo_desejado)
+                    exibir_peca_por_modelo_funcao(dados, modelo_desejado)
                 case "voyage":
                     clear_console()
                     modelo_desejado = "Voyage"
-                    filtrar_e_mostrar_pecas_funcao(dados, modelo_desejado)
+                    exibir_peca_por_modelo_funcao(dados, modelo_desejado)
                 case _:
                     print("\nModelo não identificado, tente novamente.")
                     input()
         except Exception as e:
             print(f"\nERRO: {e}")
 
-"""
--perguntar ao usuário
-1. remover peça
-2. mostrar banco de dados
-    -até que índice mostrar
-"""
+# ///////////////////////////////////////////////////////////////////////////////
+# ///////////////////////////////////////////////////////////////////////////////
+
 def remover_peca_funcao(dados):
     for lista_pecas in dados["pecas"]:
         lista_pecas.append[dados]
@@ -199,7 +273,7 @@ def remover_peca():
         print("--Remover peças--")
         print("0 - Voltar;")
         print("1 - Remover peça;")
-        print("2 - Mostrar banco de dados.")
+        print("2 - Exibir banco de dados.")
         try:
             opcao = int(input("Opção desejada: "))
             match opcao:
@@ -210,16 +284,18 @@ def remover_peca():
         except ValueError:
             print("\nERRO: Digite um valor númerico inteiro.")
             input()
-            clear_console()
         # E esse bloco vai tratar de todos os outros erros e registrá-los nessa variavel "e"
         except Exception as e:
-            print(f"\nErro: {e}")
+            print(f"\nERRO: {e}")
             input()
 
+# ///////////////////////////////////////////////////////////////////////////////
+# ///////////////////////////////////////////////////////////////////////////////
 
 # FUNÇÃO PRINCIPAL QUE RODARÁ NO MAIN.PY E CONTÉM AS FUNCIONALIDADES
 def automoveis():
     while True:
+        clear_console()
         print("-----BD AUTOMOVEIS----")
         print("Por favor, digite:")
         print("0 - Sair;")
@@ -234,9 +310,16 @@ def automoveis():
                     saindo(acao)
                     break
                 case 1:
+                    dados = leitura_banco.ler_banco()
+                    banco_pecas = []
+                    for item in dados["pecas"]:
+                        banco_pecas.append(item)
+                    inicio = 1
+                    fim = len(banco_pecas)
+                    exibir_bd(banco_pecas, inicio, fim)
                     clear_console()
                 case 2:
-                    pesquisarPecaPorModelo()
+                    exibir_peca_por_modelo()
                     clear_console()
                 case 3:
                     remover_peca()
@@ -254,10 +337,11 @@ def automoveis():
         except ValueError:
             print("\nERRO: Digite um valor númerico inteiro.")
             input()
-            clear_console()
         # E esse bloco vai tratar de todos os outros erros e registrá-los nessa variavel "e"
         except Exception as e:
             print(f"\nERRO: {e}")
             input()
             break
 #boa noite 👋👋
+
+automoveis()
