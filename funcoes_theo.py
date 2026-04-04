@@ -28,7 +28,8 @@ def saindo(acao: str):
 
     # O parâmetro "acao" permite que você escolha que verbo você vai mostrar na tela com a animação
     # Exemplo: Saindo...; Voltando...;
-    segundos = 0.20
+    segundos = 0.3
+    
     print(f"\n\r{acao}", end="", flush=True)
     time.sleep(segundos)
     print(f"\r{acao}.", end="", flush=True)
@@ -147,6 +148,10 @@ def exibir_bd(banco_pecas, inicio, fim):
                         exibir_bd_funcao(banco_pecas, inicio, fim)
                     case 2:
                         inicio, fim = definir_inicio_e_fim_funcao(escopo_atual, len(banco_pecas))
+                    case _:
+                        print("\nERRO: Valor fora das opções.")
+                        input()
+                        clear_console()
             except ValueError:
                 print("\nERRO: Digite um valor númerico inteiro.")
                 input()
@@ -281,6 +286,14 @@ def remover_peca():
                     acao = "Voltar"
                     saindo(acao)
                     break
+                case 1 | 2:
+                    print("\nFunção ainda não implementada.")
+                    input()
+                    clear_console()
+                case _:
+                    print("\nERRO: Valor fora das opções.")
+                    input()
+                    clear_console()
         except ValueError:
             print("\nERRO: Digite um valor númerico inteiro.")
             input()
