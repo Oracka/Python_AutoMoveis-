@@ -29,7 +29,7 @@ def exibir_bd_funcao(banco_pecas, inicio, fim):
         data_fabricacao = banco_pecas["data_fabricacao"]
         item += 1
         if item >= inicio and item <= fim:
-            print(f"---ID: {id} | PEÇA: {peca} | VEÍCULOS: {veiculos}\n   TIPO: {tipo} | PARTE: {parte} | FABRICANTE: {fabricante}\n   DATA DA FABRICAÃO: {data_fabricacao}")
+            print(f"---ID: {id} | PEÇA: {peca} | VEÍCULOS: {veiculos}\n   TIPO: {tipo} | PARTE: {parte} | FABRICANTE: {fabricante}\n   DATA DA FABRICAÇÃO: {data_fabricacao}")
     input("Pressione Enter para retornar ")
 
 def definir_inicio_e_fim_funcao(escopo_atual, tamanho_banco):
@@ -90,6 +90,8 @@ def exibir_bd(banco_pecas, inicio, fim):
             funcoes_gerais.clear_console()
             if inicio == primeiro_registro["id"] and fim == ultimo_registro["id"]:
                 escopo_atual = f"Todos [{len(banco_pecas)}]"
+            elif inicio == fim:
+                escopo_atual = inicio
             else:
                 escopo_atual = f"{inicio} a {fim}"
             print("-----BD AUTOMOVEIS----")

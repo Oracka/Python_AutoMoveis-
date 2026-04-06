@@ -3,9 +3,9 @@ import json
 caminho_Json = r"C:\Users\yhfff\OneDrive\Desktop\Escola\3 ano\Pythom\E1\E1_Atv10_automoveis_Colaborativo\Python_AutoMoveis--main\dados.json"
 
 #FUNÇÃO QUE LÊ O QUE ESTA NO BANCO(JSON --> Python)
-def lersJson():
-    #open(arquivo que vai ser lido, modo(escrever, ler ou etc))
-    with open(caminho_Json,"r",encoding="utf=8") as json_saida:
+def lerJson():
+    #open(arquivo que vai ser lido, modo(escrever (w), ler (r) ou etc), encoding="utf=8" -> permitir caracteres especiais)
+    with open(caminho_Json, "r", encoding="utf=8") as json_saida:
         #json.load = pega os dados do arquivo json
         #json.loads = transforma o json em string no python
         data_transform = json_saida.read()

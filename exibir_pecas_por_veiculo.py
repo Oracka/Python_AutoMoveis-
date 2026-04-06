@@ -97,7 +97,7 @@ def exibir_peca_por_modelo():
                     modelo_desejado = "Voyage"
                     exibir_peca_por_modelo_funcao(dados, modelo_desejado)
                 case _:
-                    print("\nModelo não identificado, tente novamente.")
+                    print("\nModelo não identificado, pressione Enter para tentar novamente.")
                     input()
         except Exception as e:
             print(f"\nERRO: {e}")

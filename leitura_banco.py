@@ -1,6 +1,6 @@
 import json
 #Leo = mexer no leitura banco
-ARQUIVO = r"C:\Users\tpere\Downloads\Python_AutoMoveis-\dados.json"
+ARQUIVO = r"H:\H\PYTHON\ghRepository\Python_AutoMoveis--1\Python_AutoMoveis-\dados.json"
 
 # Função que lê o banco de dados JSON e retorna um dicionário
 # caminho tem valor padrão, então pode ser chamada sem argumentos: ler_banco()
@@ -14,7 +14,11 @@ def ler_banco():
                 print("Arquivo vazio.")
                 return {}
         # Converte o texto JSON em dicionário Python e retorna
-        return json.loads(dados)
+        
+        if isinstance(dados, dict):
+            return dados
+        else:
+            return json.loads(dados)
         
     except FileNotFoundError:
         # Caso o arquivo não exista no caminho informado

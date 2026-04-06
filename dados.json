@@ -110,4 +110,4 @@
     {"id":99,"peca":"Radio bluetooth pro","tipo":"eletronica","parte":"radio","veiculos":["Voyage"],"fabricante":"AutoLux Components","data_fabricacao":"2026-04-22"},
     {"id":100,"peca":"Volante couro elite","tipo":"interior","parte":"direcao","veiculos":["Mustang"],"fabricante":"AutoLux Components","data_fabricacao":"2026-04-23"}
   ]
-}   
+}
