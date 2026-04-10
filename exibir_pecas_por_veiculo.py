@@ -78,7 +78,7 @@ def exibir_peca_por_modelo():
                     break
                 case "fusca":
                     funcoes_gerais.clear_console()
-                    modelo_desejado = "Fusca"
+                    modelo_desejado = (modelo_desejado.capitalize()) # TESTE ESSE CÓDIGO NO SEU COMPUTER THEO
                     exibir_peca_por_modelo_funcao(dados, modelo_desejado)
                 case "kombi":
                     funcoes_gerais.clear_console()
