@@ -1,5 +1,3 @@
-# Olha o grupo pra ver porque eu tirei meus códigos daqui ok!!
-# -Theo
 from datetime import datetime
 import leitura_banco
 

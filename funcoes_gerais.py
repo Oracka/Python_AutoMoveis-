@@ -10,9 +10,11 @@ import exibir_bd
 import exibir_pecas_por_veiculo
 import remover_peca
 
+# Função da linha de código pra limpar tela
 def clear_console(): 
     os.system('cls' if os.name == 'nt' else 'clear')
 
+# Função para a pequena animação de transição ao voltar telas ou sair do programa
 def saindo(acao: str):
     # Não assusta com esse trem não!! Eu só quis fazer um efeitozinho
     # de "Saindo..." pra quando o usuário digitar "0". Eu pesquisei e
@@ -81,4 +83,3 @@ def automoveis():
             print(f"\nERRO: {e}")
             input()
             break
-#boa noite 👋👋
